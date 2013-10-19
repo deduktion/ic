@@ -30,7 +30,7 @@
   "int-check in clojure
    so far a basic first example:
     - add new store
-      lein run -s storename -p /path/to/store -a
+      lein run -s storename -p /path/to/store -n
     - list stores
       lein run -l
     - rescan store by name
