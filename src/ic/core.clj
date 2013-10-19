@@ -17,26 +17,26 @@
   (let [[options args banner] 
       (cli args
          ["-h" "--help" "show help"]
-         ["-s" "--store" "store"]
-         ["-S" "--scan" "scan store"]
-         ["-a" "--algorithm" "set cryptographic hash type" :default "sha-256"]
-         ["-l" "--list" "list stores" :flag true]
          ["-r" "--rescan" "rescan store" :flag false]
-         ["-p" "--path"
-          "path to a directory with your files to index"
-          :default ""]
-         ["-l" "--label"
-          "label for your collection"
-          :default ""])]
+         ["-a" "--algorithm" "set cryptographic hash type" :default "sha-256"]
+         ["-s" "--store" "store"]
+           ["-n" "--new" "new store" :flag false]
+           ["-d" "--delete" "delete a store" :flag false]
+           ["-l" "--list" "list stores" :flag false]
+           ["-p" "--path" "path to a directory with your files to index"])]
     (init-config)
     (with-connection db
       (if (contains? options :help) (show-banner banner))
-      (if (and
-            (contains? options :label)
-            (contains? options :path))
-        (rescan (:label options) (:path options)))
-      (if (and
-            (contains? options :rescan)
-            (contains? options :label))
-        (rescan (:label options) (:path options)))
+      (if (contains? options :store)
+        (do
+          (if (contains? options :path)
+            (do (if (contains? options :new)
+                  (add-store (:store options) (:path options)))
+                (if (contains? options :delete)
+                  (delete-store (:store options))))
+          (if (and
+                (contains? options :rescan)
+                (store-exists? (:store options)))
+            (rescan (:store options))))
+        (list-stores)))
       (if (contains? options :list) (list-stores)))))
