@@ -2,7 +2,9 @@
   (:use [digest] :reload-all
         [clojure.tools.logging :only (info error)]
         [clj-logging-config.log4j]))
-(set-logger! :pattern "%d - %m%n")
+
+(def log-pattern "%d:%p:%c:: %m%n")
+(set-logger! :pattern log-pattern)
 
 (def kb 1024)
 (defn msec [] (System/currentTimeMillis))

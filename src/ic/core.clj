@@ -9,7 +9,7 @@
         [clj-logging-config.log4j])
   (:import java.io.File)
   (:gen-class :main true))
-(set-logger! :pattern "%d - %m%n")
+(set-logger! :pattern log-pattern)
 (info "ic start " (msec))
 
 (defn -main [& args]

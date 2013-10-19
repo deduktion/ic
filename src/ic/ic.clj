@@ -4,7 +4,7 @@
         [clojure.java.jdbc :exclude (resultset-seq)]
         [clojure.tools.logging :only (info error)]
         [clj-logging-config.log4j]))
-(set-logger! :pattern "%d - %m%n")
+(set-logger! :pattern log-pattern)
 
 (defn rescan-path [path]
   "rescan a collection"

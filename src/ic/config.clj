@@ -3,7 +3,7 @@
         [clojure.tools.logging :only (info error)]
         [clojure.data.json :as json]
         [clj-logging-config.log4j]))
-(set-logger! :pattern "%d - %m%n")
+(set-logger! :pattern log-pattern)
 
 (defn- user-prop
   "Returns the system property for user.<key>"
