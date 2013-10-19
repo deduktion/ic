@@ -1,6 +1,7 @@
 (ns ic.core
   (:use [ic.tools]
         [ic.config]
+        [ic.stores]
         [ic.db]
         [ic.ic]
         [clojure.java.jdbc :exclude (resultset-seq)]
@@ -26,7 +27,7 @@
            ["-p" "--path" "path to a directory with your files to index"])]
     (init-config)
     (with-connection db
-      (if (contains? options :help) (show-banner banner))
+      (if (contains? options :help) (println banner))
       (if (contains? options :store)
         (do
           (if (contains? options :path)

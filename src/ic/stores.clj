@@ -1,0 +1,45 @@
+(ns ic.stores
+  (:use [ic.tools]
+        [ic.config]
+        [clojure.tools.logging :only (info error)]
+        [clojure.data.json :as json]
+        [clj-logging-config.log4j]))
+(set-logger! :pattern log-pattern)
+
+(defn load-stores
+  "load stores"
+  []
+  (info "load stores")
+  (json/read-str (slurp store-path)))
+
+(defn list-stores
+  "list all stores"
+  []
+  (info "list all stores")
+  (println (load-stores)))
+
+(defn save-stores
+  "save a store"
+  [stores]
+  (info "save stores " stores)
+  (spit store-path (json/write-str stores)))
+
+(defn add-store
+  "add a store"
+  [name path]
+  (info "add a store: " name " " path)
+  (let [stores (load-stores)]
+    (save-stores (assoc stores name path))))
+
+(defn delete-store
+  "delete a store"
+  [name]
+  (info "delete store: " name)
+  (let [stores (load-stores)]
+    (save-stores (dissoc stores name))))
+
+(defn store-exists?
+  "check if a store exists"
+  [name]
+  (info "store exists? " name)
+  (contains? (load-stores) name))

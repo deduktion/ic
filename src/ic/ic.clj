@@ -1,6 +1,7 @@
 (ns ic.ic
   (:use [ic.tools]
         [ic.config]
+        [ic.stores]
         [clojure.java.jdbc :exclude (resultset-seq)]
         [clojure.tools.logging :only (info error)]
         [clj-logging-config.log4j]))
