@@ -6,23 +6,27 @@
         [clj-logging-config.log4j]))
 (set-logger! :pattern log-pattern)
 
+(defn save-stores
+  "save a store"
+  [stores]
+  (info "save stores " stores)
+  (spit store-path (json/write-str stores)))
+
 (defn load-stores
   "load stores"
   []
   (info "load stores")
-  (json/read-str (slurp store-path)))
+  (try (json/read-str (slurp store-path))
+  (catch java.io.FileNotFoundException e
+    (do (error e)
+        (save-stores {})))
+  (catch Exception e (error e))))
 
 (defn list-stores
   "list all stores"
   []
   (info "list all stores")
   (println (load-stores)))
-
-(defn save-stores
-  "save a store"
-  [stores]
-  (info "save stores " stores)
-  (spit store-path (json/write-str stores)))
 
 (defn add-store
   "add a store"

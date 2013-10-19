@@ -26,4 +26,5 @@
     (catch Exception e (println e))))
 
 (try (create-db)
- (catch Exception e (println e)))
+ (catch java.sql.BatchUpdateException e (error e))
+ (catch Exception e (error e)))

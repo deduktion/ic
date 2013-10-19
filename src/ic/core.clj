@@ -27,7 +27,15 @@
         ["-p" "--path" "path to a directory with your files to index"]))
 
 (defn -main
-  "int-check in clojure"
+  "int-check in clojure
+   so far a basic first example:
+    - add new store
+      lein run -s storename -p /path/to/store -a
+    - list stores
+      lein run -l
+    - rescan store by name
+      lein run -s storename -r
+  "
   [& args]
   (let [[options args banner] (arguments args)]
     (init-config)

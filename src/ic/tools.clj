@@ -6,9 +6,9 @@
 (set-logger! :pattern log-pattern)
 
 (def kb 1024)
-(defn msec [] (System/currentTimeMillis))
 (def units ["B " "kB" "MB" "GB" "TB" "PB" "EB" "ZB" "YB"])
 (def units-size)
+(defn msec [] (System/currentTimeMillis))
 (defn ftime [ms] (format "%6.3fs" (/ (double ms) 1000)))
 (defn exit [] (System/exit 0))
 (defn blank [s] (clojure.string/blank? s))
