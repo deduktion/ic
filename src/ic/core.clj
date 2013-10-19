@@ -13,8 +13,9 @@
 (set-logger! :pattern log-pattern)
 (info "ic start " (msec))
 
-(defn -main [& args]
+(defn -main
   "int-check in clojure"
+  [& args]
   (let [[options args banner] 
       (cli args
          ["-h" "--help" "show help"]

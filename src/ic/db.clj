@@ -11,7 +11,9 @@
     :subprotocol "sqlite"
     :subname db-path})
 
-(defn create-db []
+(defn create-db
+  "create database"
+  []
   (try (with-connection db
          (create-table :intchk
                        [:path :text]

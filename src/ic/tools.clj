@@ -2,7 +2,6 @@
   (:use [digest] :reload-all
         [clojure.tools.logging :only (info error)]
         [clj-logging-config.log4j]))
-
 (def log-pattern "%d:%p:%c:: %m%n")
 (set-logger! :pattern log-pattern)
 
