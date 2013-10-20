@@ -1,6 +1,7 @@
 (ns ic.ic
   (:use [ic.tools]
         [ic.config]
+        [ic.db]
         [ic.stores]
         [clojure.java.jdbc :exclude (resultset-seq)]
         [clojure.tools.logging :only (info error)]
@@ -19,8 +20,7 @@
               chksum (checksum f)
               took (- (msec) now)]
             (info chksum " " (grab-unit size) " " (ftime took) " " (str f))
-            (try (insert-records
-                :intchk
+            (try (insert-records :ic
                 {:path (str f) :chksum chksum :size size
                  :took took    :first now     :last now})
             (catch Exception e (error e))))))))

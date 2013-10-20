@@ -4,6 +4,7 @@
         [ic.stores]
         [ic.db]
         [ic.ic]
+        [ic.stats]
         [clojure.java.jdbc :exclude (resultset-seq)]
         [clojure.tools.cli :only [cli]]
         [clojure.tools.logging :only (info error)]
@@ -18,6 +19,7 @@
   [args]
   (cli args
       ["-h" "--help" "show help"]
+      ["-i" "--info" "info and stats"]
       ["-r" "--rescan" "rescan store" :flag false]
       ["-a" "--algorithm" "set cryptographic hash type" :default "sha-256"]
       ["-s" "--store" "store"]
@@ -35,12 +37,15 @@
       lein run -l
     - rescan store by name
       lein run -s storename -r
+    - show basic stats
+      lein run -i
   "
   [& args]
   (let [[options args banner] (arguments args)]
     (init-config)
     (with-connection db
       (if (contains? options :help) (println banner))
+      (if (contains? options :info) (println (stats)))
       (if (contains? options :store)
         (do
           (if (contains? options :path)
