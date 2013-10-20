@@ -26,10 +26,15 @@
 (defn exit [] (System/exit 0))
 (defn blank [s] (clojure.string/blank? s))
 (defn files [p] (file-seq (clojure.java.io/file p)))
-(defn checksum [file]
-  "sha-256, more later"
-  (digest/sha-256 file))
-
+(defn checksum
+  "checksum of a file with algorithm"
+  [file algorithm]
+  (cond
+    (= algorithm "md5")(digest/md5 file)
+    (= algorithm "sha-1")(digest/sha-1 file)
+    (= algorithm "sha-256")(digest/sha-256 file)
+    (= algorithm "sha-512")(digest/sha-512 file)))
+(defn str>int [s] (Integer. (re-find #"[0-9]*" s)))
 (defn grab-unit
  "comment"
   [bytes]

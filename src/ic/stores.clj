@@ -34,15 +34,13 @@
   "add a store"
   [name path]
   (info "add a store: " name " " path)
-  (let [stores (load-stores)]
-    (save-stores (assoc stores name path))))
+  (save-stores (assoc (load-stores) name path)))
 
 (defn delete-store
   "delete a store"
   [name]
   (info "delete store: " name)
-  (let [stores (load-stores)]
-    (save-stores (dissoc stores name))))
+  (save-stores (dissoc (load-stores) name)))
 
 (defn store-exists?
   "check if a store exists"
