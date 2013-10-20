@@ -9,6 +9,6 @@
 (defn stats
   "show stats of store with name"
   []
-  (let [entries (entries)
+  (let [entries (select-entries)
         size-total (reduce + (map :size entries))]
     (println "STATS: size: " (grab-unit size-total))))

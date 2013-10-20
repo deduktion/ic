@@ -9,7 +9,7 @@
 (def units ["B " "kB" "MB" "GB" "TB" "PB" "EB" "ZB" "YB"])
 (def units-size)
 (defn msec [] (System/currentTimeMillis))
-(defn ftime [ms] (format "%6.3fs" (/ (double ms) 1000)))
+(defn ftime [ms] (format "%6.3fs" (/ (double ms) 1000.)))
 (defn exit [] (System/exit 0))
 (defn blank [s] (clojure.string/blank? s))
 (defn files [p] (file-seq (clojure.java.io/file p)))

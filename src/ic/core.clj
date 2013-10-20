@@ -53,9 +53,8 @@
                   (add-store (:store options) (:path options)))
                 (if (contains? options :delete)
                   (delete-store (:store options))))
-          (if (and
-                (contains? options :rescan)
-                (store-exists? (:store options)))
+          (if (and (contains? options :rescan)
+                   (store-exists? (:store options)))
             (rescan (:store options))))
         (list-stores)))
       (if (contains? options :list) (list-stores)))))

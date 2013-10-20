@@ -8,19 +8,22 @@
         [clj-logging-config.log4j]))
 (set-logger! :pattern log-pattern)
 
+(defn check-needed?
+  "check if the last rescan > interval"
+  [entry interval]
+  (> (/ (- (msec) (:last entry)) 1000.) interval))
+
 (defn rescan
   "rescan a collection"
   [name]
   (info "rescan store: " name)
-  (let [path (get (load-stores) name)]
+  (let [path (get (load-stores) name)
+        interval (get (load-config) "interval")]
     (doseq [f (files path)]
       (if (.isFile f)
-        (let [now (msec)
-              size (.length f)
-              chksum (checksum f)
-              took (- (msec) now)]
-            (info chksum " " (grab-unit size) " " (ftime took) " " (str f))
-            (try (insert-records :ic
-                {:path (str f) :chksum chksum :size size
-                 :took took    :first now     :last now})
-            (catch Exception e (error e))))))))
+        (let [existing-entry (select-entry (str f))]
+          (if existing-entry
+            (if (check-needed? existing-entry interval)
+              (update-entry existing-entry)
+              (info "up-to-date: " (str f)))
+            (insert-entry f)))))))
