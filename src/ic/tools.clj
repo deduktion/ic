@@ -9,7 +9,7 @@
 (def human-readable-time-short "%02dm %02ds %03dms")
 (def human-readable-time-long "%dh %02dmin %02ds %03dms")
 (def units ["B " "kB" "MB" "GB" "TB" "PB" "EB" "ZB" "YB"])
-(def units-size)
+(def units-sizes (map #(vector %1 %2) units (iterate #(* %1 kb) 1)))
 (defn msec [] (System/currentTimeMillis))
 (defn ftime [ms] (format "%6.3fs" (/ (double ms) 1000.)))
 (defn htime
@@ -36,9 +36,7 @@
     (= algorithm "sha-512")(digest/sha-512 file)))
 (defn str>int [s] (Integer. (re-find #"[0-9]*" s)))
 (defn grab-unit
- "comment"
+  "grab a unit"
   [bytes]
-  (let [sizes (iterate #(* %1 kb) 1)
-        units-sizes (map #(vector %1 %2) units sizes)
-        unit-size   (some #(if (< (/ bytes (second %)) kb) % false) units-sizes)]
-    (format "%8.3f %s" (/ (double bytes) (second unit-size)) (first unit-size))))
+  (let [match (some #(if (< (/ bytes (second %)) kb)% false) units-sizes)]
+    (format "%8.3f %s" (/ (double bytes) (second match)) (first match))))
