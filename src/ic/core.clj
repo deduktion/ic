@@ -48,7 +48,7 @@
     (init-config)
     (with-connection db
       (if (contains? options :help) (println banner))
-      (if (contains? options :info) (println (stats)))
+      (if (contains? options :info) (total-stats))
       (if (contains? options :rescan-all) (rescan-all))
       (if (contains? options :store)
         (do

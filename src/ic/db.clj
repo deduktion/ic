@@ -49,10 +49,10 @@
         x (.canExecute file)
         hidden (.isHidden file)]
     {:prefix path :path filepath :chksum chksum
-      :size size :took took
-      :firstscan now :lastscan now
-      :lastmodified last-modified
-      :r r :w w :x x :hidden hidden}))
+     :size size :took took
+     :firstscan now :lastscan now
+     :lastmodified last-modified
+     :r r :w w :x x :hidden hidden}))
 
 (defn records-equal?
   "compare a db-record with the generated from fs"
@@ -70,7 +70,7 @@
     (info "insert " chksum " " (grab-unit size) " " (ftime took) " " (str file))
     (try (insert-records :ic (create-record path file))
     (catch Exception e (error e)))))
-
+ 
 (defn select-entries
   "all entries"
   []

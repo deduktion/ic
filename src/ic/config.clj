@@ -10,12 +10,15 @@
   [key]
   (System/getProperty (str "user." key)))
 (def user-home (user-prop "home"))
-
+(def username (user-prop "name"))
 (def config-path (str user-home "/.ic.config"))
 (def db-path (str user-home "/.ic.db"))
 (def store-path (str user-home "/.ic.stores"))
-(def default-config {:algorithm "sha-256" :interval 259200})
-
+(def one-month-in-seconds 259200)
+(def default-algorithm "sha-256")
+(def default-config {:algorithm default-algorithm
+                     :interval one-month-in-seconds})
+(info "hello " username "@" user-home)
 (info "config-path:  " config-path)
 
 (defn save-config
