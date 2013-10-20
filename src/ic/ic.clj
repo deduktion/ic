@@ -11,17 +11,16 @@
 (defn check-needed?
   "check if the last rescan > interval"
   [entry interval]
-  (> (/ (- (msec) (:last entry)) 1000.) interval))
+  (> (/ (- (msec) (:lastscan entry)) 1000.) interval))
 
 (defn rescan-file
   "rescan a single file"
-  [file interval]
+  [path file interval]
   (let [existing-entry (select-entry (str file))]
     (if existing-entry
       (if (check-needed? existing-entry interval)
-        (update-entry existing-entry)
-        (info "up-to-date: " (str file)))
-      (insert-entry file))))
+        (update-entry path file))
+      (insert-entry path file))))
 
 (defn rescan
   "rescan a collection"
@@ -30,4 +29,10 @@
   (let [path (get (load-stores) name)
         interval (get (load-config) "interval")]
     (doseq [file (files path)]
-      (if (.isFile file) (rescan-file file interval)))))
+      (if (.isFile file) (rescan-file path file interval)))))
+
+(defn rescan-all
+  "rescan all stores"
+  []
+  (info "rescan-all:  "  (load-stores))
+  (doseq [store (keys (load-stores))] (rescan store)))

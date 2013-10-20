@@ -3,7 +3,9 @@
         [ic.config]
         [clojure.tools.logging :only (info error)]
         [clojure.data.json :as json]
-        [clj-logging-config.log4j]))
+        [clj-logging-config.log4j])
+  (:require
+        [clojure.pprint :only (pprint) :as pp]))
 (set-logger! :pattern log-pattern)
 
 (defn save-stores
@@ -26,7 +28,7 @@
   "list all stores"
   []
   (info "list all stores")
-  (println (load-stores)))
+  (pp/pprint (load-stores)))
 
 (defn add-store
   "add a store"

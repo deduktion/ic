@@ -20,6 +20,7 @@
   (cli args
       ["-h" "--help" "show help"]
       ["-i" "--info" "info and stats"]
+      ["-R" "--rescan-all" "rescan all stores"]
       ["-r" "--rescan" "rescan store" :flag false]
       ["-a" "--algorithm" "set cryptographic hash type" :default "sha-256"]
       ["-s" "--store" "store"]
@@ -39,6 +40,8 @@
       lein run -s storename -r
     - show basic stats
       lein run -i
+    - rescan all stores
+      lein run -R
   "
   [& args]
   (let [[options args banner] (arguments args)]
@@ -46,6 +49,7 @@
     (with-connection db
       (if (contains? options :help) (println banner))
       (if (contains? options :info) (println (stats)))
+      (if (contains? options :rescan-all) (rescan-all))
       (if (contains? options :store)
         (do
           (if (contains? options :path)
