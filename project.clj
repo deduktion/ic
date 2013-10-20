@@ -11,6 +11,7 @@
                  [org.clojure/tools.cli "0.2.4"]
                  [org.clojure/tools.logging "0.2.6"]
                  [org.clojure/data.json "0.2.3"]
+                 [seesaw "1.4.4"]
                  [clj-logging-config "1.9.10"]]
   :main ^:skip-aot ic.core
   :target-path "target/%s"

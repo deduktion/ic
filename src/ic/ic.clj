@@ -19,7 +19,8 @@
   (let [existing-entry (select-entry (str file) algorithm)]
     (if existing-entry
       (if (check-needed? existing-entry interval)
-        (update-entry path file algorithm))
+        (update-entry path file algorithm)
+        (info "skip (up-to-date) " (str file)))
       (insert-entry path file algorithm))))
 
 (defn rescan
