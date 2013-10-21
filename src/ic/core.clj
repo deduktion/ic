@@ -1,6 +1,6 @@
 (ns ic.core
   (:use [ic db tools]
-        [ic.ui console gui]
+        [ic.ui terminal gui]
         [clojure.java.jdbc :only (with-connection)]
         [clojure.tools.logging :only (info)]
         [clj-logging-config.log4j])

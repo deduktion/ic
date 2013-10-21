@@ -1,4 +1,4 @@
-(ns ic.ui.console
+(ns ic.ui.terminal
   (:use [ic config stores ic stats]
         [clojure.tools.cli :only (cli)]))
 
