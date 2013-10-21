@@ -22,7 +22,6 @@
 (defn rescan
   "rescan a collection"
   [name]
-  (info "rescan store: " name)
   (let [path (get (load-stores) name)
         config (load-config)
         interval (get config "interval")
@@ -33,5 +32,4 @@
 (defn rescan-all
   "rescan all stores"
   []
-  (info "rescan-all")
   (doseq [store (keys (load-stores))] (rescan store)))

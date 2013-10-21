@@ -2,7 +2,7 @@
   (:use [digest] :reload-all
         [clj-time.coerce :as tc]))
 
-(def log-pattern "%d:%p:%c:: %m%n")
+(def log-pattern "%d:%p:%c: %m%n")
 (def kb 1024)
 (def human-readable-time-short "%02dm %02ds %03dms")
 (def human-readable-time-long "%dh %02dmin %02ds %03dms")

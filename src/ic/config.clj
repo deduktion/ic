@@ -22,19 +22,16 @@
 (defn save-config
   "save config"
   [config]
-  (info "save config")
   (spit config-path (json/write-str config)))
 
 (defn load-config
   "load config"
   []
-  (info "load config")
   (json/read-str (slurp config-path)))
 
 (defn init-config
   "init config"
   []
-  (info "init config")
   (try (load-config)
     (catch java.io.FileNotFoundException e
       (do (info "no config present, create default-config")
@@ -44,13 +41,11 @@
 (defn set-algorithm
   "set algorithm for ic"
   [algorithm]
-  (info "set algorithm: " algorithm)
   (let [config (init-config)]
     (save-config (assoc config "algorithm" algorithm))))
 
 (defn set-interval
   "set interval for next scan"
   [interval]
-  (info "set interval: " interval)
   (let [config (init-config)]
     (save-config (assoc config "interval" (str>int interval)))))
