@@ -15,6 +15,9 @@
 * lein run -s storename -p /path/to/store -n
 * lein run -s otherstore -p /path/to/other/store -n
 
+## delete a store
+* lein run -s storename -d
+
 ## list stores
 * lein run -l
 
