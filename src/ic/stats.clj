@@ -1,8 +1,5 @@
 (ns ic.stats
-  (:use [clojure.tools.logging :only (info error)]
-        [ic.tools config db]
-        [clj-logging-config.log4j]))
-(set-logger! :pattern log-pattern)
+  (:use  [ic tools config db]))
 
 (defn total-size "" [entries] (reduce + (map :size entries)))
 (defn total-took "" [entries] (reduce + (map :took entries)))

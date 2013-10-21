@@ -1,7 +1,7 @@
 (ns ic.core
-  (:use [ic config db tools]
+  (:use [ic db tools]
         [ic.ui console gui]
-        [clojure.java.jdbc :exclude (resultset-seq)]
+        [clojure.java.jdbc :only (with-connection)]
         [clojure.tools.logging :only (info)]
         [clj-logging-config.log4j])
   (:import java.io.File)
@@ -14,7 +14,6 @@
   [& args]
   (let [[options args banner] (arguments args)]
     (with-connection db
-      (init-config)
       (if (contains? options :gui)
         (switch-to-gui (select-entries))
         (switch-to-terminal options banner)))))

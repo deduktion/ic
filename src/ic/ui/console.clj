@@ -1,15 +1,6 @@
 (ns ic.ui.console
-  (:use [ic.tools]
-        [ic.config]
-        [ic.stores]
-        [ic.db]
-        [ic.ic]
-        [ic.stats]
-        [clojure.tools.cli :only [cli]]
-        [seesaw core]
-        [clojure.tools.logging :only (info error)]
-        [clj-logging-config.log4j]))
-(set-logger! :pattern log-pattern)
+  (:use [ic config stores ic stats]
+        [clojure.tools.cli :only (cli)]))
 
 (defn arguments
   "specify arguments"

@@ -1,11 +1,5 @@
 (ns ic.ui.gui
-  (:use [ic.tools]
-        [ic.config]
-        [ic.stores]
-        [ic.db]
-        [ic.ic]
-        [ic.stats]
-        [clojure.tools.cli :only [cli]]
+  (:use [ic tools stats]
         [seesaw core]
         [clojure.tools.logging :only (info error)]
         [clj-logging-config.log4j]))
@@ -14,7 +8,8 @@
 (def table-header (list
   :path :chksum :algorithm
   :size :took
-  :r :w :x :hidden))
+  :r :w :x
+  :hidden))
 
 (defn make-table [header data]
   (table :id :file-table
@@ -43,14 +38,17 @@
       :north (label :id :current-dir
                     :text "menu")
       :west (label :id :file-tree
-                   :text "tree" :visible? false)
+                   :text "tree"
+                   :visible? false)
       :center (scrollable
-                (make-table table-header (table-data entries)))
+                (make-table
+                  table-header
+                  (table-data entries)))
       :east (label :id :file-props
                    :text "file-props"
                    :visible? false)
       :south (label :id :status
-                    :text (str "Ready. " (str (total-stats))))))
+                    :text (str (total-stats)))))
 
 (defn switch-to-gui
   "run in gui mode"

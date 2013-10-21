@@ -48,11 +48,13 @@
         w (.canWrite file)
         x (.canExecute file)
         hidden (.isHidden file)]
-    {:prefix path :path filepath :chksum chksum
-     :algorithm algorithm :size size :took took
+    {:prefix path :path filepath
+     :chksum chksum :algorithm algorithm
+     :size size :took took
      :firstscan now :lastscan now
      :lastmodified last-modified
-     :r r :w w :x x :hidden hidden}))
+     :r r :w w :x x
+     :hidden hidden}))
 
 (defn records-equal?
   "compare a db-record with the generated from fs"
