@@ -41,6 +41,9 @@
 
     - show basic stats
       lein run -i
+
+    - show data in gui
+      lein run -g
   "
   [& args]
   (let [[options args banner] (arguments args)]

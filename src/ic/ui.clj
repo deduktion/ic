@@ -11,13 +11,41 @@
         [clj-logging-config.log4j]))
 (set-logger! :pattern log-pattern)
 
+(def table-header (list
+  :path :chksum :algorithm
+  :size :took
+  :r :w :x :hidden))
+
+(defn make-table [header data]
+  (table :id :file-table
+         :model [:columns header
+                 :rows data]))
+
+(defn table-data
+  "create table data from entries"
+  [entries]
+  (map
+    #(vector %1 %2 %3 %4 %5 %6 %7 %8 %9)
+      (map :path entries)
+      (map :chksum entries)
+      (map :algorithm entries)
+      (map grab-unit (map :size entries))
+      (map ftime (map :took entries))
+      (map :r entries)
+      (map :w entries)
+      (map :x entries)
+      (map :hidden entries)))
+
 (defn make-content [entries]
-  (border-panel :border 5 :hgap 5 :vgap 5
+  (border-panel :border 5
+                :hgap 5
+                :vgap 5
       :north (label :id :current-dir
                     :text "menu")
       :west (label :id :file-tree
                    :text "tree" :visible? false)
-      :center (scrollable (listbox :model (map :path entries)))
+      :center (scrollable
+                (make-table table-header (table-data entries)))
       :east (label :id :file-props
                    :text "file-props"
                    :visible? false)
