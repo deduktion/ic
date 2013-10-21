@@ -44,8 +44,7 @@
 (defn checksum
   "checksum of a file with algorithm"
   [file algorithm]
-  (cond
-    (= algorithm "md5")(digest/md5 file)
-    (= algorithm "sha-1")(digest/sha-1 file)
-    (= algorithm "sha-256")(digest/sha-256 file)
-    (= algorithm "sha-512")(digest/sha-512 file)))
+  (case algorithm "md5" (digest/md5 file)
+                  "sha-1" (digest/sha-1 file)
+                  "sha-256" (digest/sha-256 file)
+                  "sha-512" (digest/sha-512 file)))
