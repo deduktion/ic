@@ -1,10 +1,8 @@
 (ns ic.core
-  (:use [ic.config]
-        [ic.db]
-        [ic.ui]
-        [ic.tools]
+  (:use [ic config db tools]
+        [ic.ui console gui]
         [clojure.java.jdbc :exclude (resultset-seq)]
-        [clojure.tools.logging :only (info error)]
+        [clojure.tools.logging :only (info)]
         [clj-logging-config.log4j])
   (:import java.io.File)
   (:gen-class :main true))

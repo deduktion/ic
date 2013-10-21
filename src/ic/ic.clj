@@ -1,10 +1,7 @@
 (ns ic.ic
-  (:use [ic.tools]
-        [ic.config]
-        [ic.db]
-        [ic.stores]
+  (:use [ic tools config db stores]
         [clojure.java.jdbc :exclude (resultset-seq)]
-        [clojure.tools.logging :only (info error)]
+        [clojure.tools.logging :only (info)]
         [clj-logging-config.log4j]))
 (set-logger! :pattern log-pattern)
 

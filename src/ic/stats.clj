@@ -1,8 +1,6 @@
 (ns ic.stats
   (:use [clojure.tools.logging :only (info error)]
-        [ic.tools]
-        [ic.config]
-        [ic.db]
+        [ic.tools config db]
         [clj-logging-config.log4j]))
 (set-logger! :pattern log-pattern)
 

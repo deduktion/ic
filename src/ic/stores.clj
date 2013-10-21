@@ -1,6 +1,5 @@
 (ns ic.stores
-  (:use [ic.tools]
-        [ic.config]
+  (:use [ic tools config]
         [clojure.tools.logging :only (info error)]
         [clojure.data.json :as json]
         [clj-logging-config.log4j])
