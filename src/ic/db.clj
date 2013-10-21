@@ -80,25 +80,22 @@
 (defn select-entries
   "all entries"
   []
-  (with-connection db
-    (with-query-results rs ["select * from ic"] (doall rs))))
+  (with-query-results rs ["select * from ic"] (doall rs)))
 
 (defn select-entry
   "look for entry with"
   [path algorithm]
-  (with-connection db
-    (with-query-results rs
-      ["select * from ic where path=? and algorithm=?" path algorithm]
-      (first rs))))
+  (with-query-results rs
+    ["select * from ic where path=? and algorithm=?" path algorithm]
+    (first rs)))
 
 (defn update-last-scan-for
   "update the filed lastscan for existing entry"
   [path algorithm]
   (info "re-check: [" algorithm "]" path)
-  (with-connection db
-    (update-values
-      :ic ["path=? and algorithm=?" path algorithm]
-      {:lastscan (msec)})))
+  (update-values
+    :ic ["path=? and algorithm=?" path algorithm]
+    {:lastscan (msec)}))
 
 (defn update-entry
   "update an entry"
