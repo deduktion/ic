@@ -7,7 +7,7 @@
   (:import java.io.File)
   (:gen-class :main true))
 (set-logger! :pattern log-pattern)
-(info "ic start " (msec))
+(info "ic start " (str (hdate (msec))))
 
 (defn -main
   "run ic"

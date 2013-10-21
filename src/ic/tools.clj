@@ -1,5 +1,6 @@
 (ns ic.tools
-  (:use [digest] :reload-all))
+  (:use [digest] :reload-all
+        [clj-time.coerce :as tc]))
 
 (def log-pattern "%d:%p:%c:: %m%n")
 (def kb 1024)
@@ -16,6 +17,11 @@
 (defn msec
   "current milliseconds"
   [] (System/currentTimeMillis))
+
+(defn hdate
+  "human readable date from"
+  [timestamp]
+  (tc/from-long timestamp))
 
 (defn ftime
   "format ms in seconds with .3 millis"
