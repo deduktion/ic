@@ -20,7 +20,7 @@
     (if existing-entry
       (if (check-needed? existing-entry interval)
         (update-entry path file algorithm)
-        (info "skip (up-to-date) " (str file)))
+        (info "-" (str file)))
       (insert-entry path file algorithm))))
 
 (defn rescan
@@ -37,5 +37,5 @@
 (defn rescan-all
   "rescan all stores"
   []
-  (info "rescan-all:  "  (load-stores))
+  (info "rescan-all")
   (doseq [store (keys (load-stores))] (rescan store)))

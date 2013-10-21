@@ -69,9 +69,7 @@
         size (.length file)
         chksum (checksum file algorithm)
         took (- (msec) now)]
-    (info "insert " algorithm
-          " " chksum
-          " " (grab-unit size)
+    (info "+" (grab-unit size)
           " " (ftime took)
           " " (str file))
     (try (insert-records :ic (create-record path file algorithm))
@@ -92,7 +90,7 @@
 (defn update-last-scan-for
   "update the filed lastscan for existing entry"
   [path algorithm]
-  (info "re-check: [" algorithm "]" path)
+  (info "=" path)
   (update-values
     :ic ["path=? and algorithm=?" path algorithm]
     {:lastscan (msec)}))

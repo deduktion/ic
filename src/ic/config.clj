@@ -18,19 +18,17 @@
 (def default-algorithm "sha-256")
 (def default-config {:algorithm default-algorithm
                      :interval one-month-in-seconds})
-(info "hello " username "@" user-home)
-(info "config-path:  " config-path)
 
 (defn save-config
   "save config"
   [config]
-  (info "save config: " config)
+  (info "save config")
   (spit config-path (json/write-str config)))
 
 (defn load-config
   "load config"
   []
-  (info "load config: ")
+  (info "load config")
   (json/read-str (slurp config-path)))
 
 (defn init-config
@@ -46,11 +44,13 @@
 (defn set-algorithm
   "set algorithm for ic"
   [algorithm]
+  (info "set algorithm: " algorithm)
   (let [config (init-config)]
     (save-config (assoc config "algorithm" algorithm))))
 
 (defn set-interval
   "set interval for next scan"
   [interval]
+  (info "set interval: " interval)
   (let [config (init-config)]
     (save-config (assoc config "interval" (str>int interval)))))
