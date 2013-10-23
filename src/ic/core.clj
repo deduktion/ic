@@ -15,5 +15,5 @@
   (let [[options args banner] (arguments args)]
     (with-connection db
       (if (contains? options :gui)
-        (switch-to-gui (select-entries))
+        (switch-to-gui)
         (switch-to-terminal options banner)))))

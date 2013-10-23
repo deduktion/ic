@@ -81,6 +81,11 @@
   []
   (with-query-results rs ["select * from ic"] (doall rs)))
 
+(defn select-store
+  "select just one store"
+  [path]
+  (with-query-results rs ["select * from ic where prefix=?" path] (doall rs)))
+
 (defn select-entry
   "look for entry with"
   [path algorithm]
